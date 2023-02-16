@@ -4,18 +4,36 @@ direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
 text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
 
-#Combining the encrypt() and decrypt() functions into a single function called caesar().
+#Creating a function called 'encrypt' that takes the 'text' and 'shift' as inputs.
 
-def caesar(start_text, shift_amount, cipher_direction):
-    end_text = ""
-    if cipher_direction == 'decode':
-            shift_amount *= -1
-    for letter in start_text:        
-        position = alphabet.index(letter)        
-        new_position = position + shift_amount
-        end_text += alphabet[new_position]
-    print(f"The {direction}d text is {end_text}") 
+def encrypt(plain_text, shift_amount):
+  cipher_text = ""
+  for letter in plain_text:
+    position = alphabet.index(letter)
+    new_position = position + shift_amount
+    cipher_text += alphabet[new_position]
+  print(f"The encoded text is {cipher_text}")
 
-#Calling the caesar() function, passing over the 'text', 'shift' and 'direction' values.
+#Creating a different function called 'decrypt' that takes the 'text' and 'shift' as inputs.
 
-caesar(start_text=text, shift_amount=shift, cipher_direction=direction)
+def decrypt(cipher_text, shift_amount):
+  plain_text = ""
+  for letter in cipher_text:
+    position = alphabet.index(letter)
+    new_position = position - shift_amount
+    plain_text += alphabet[new_position]
+  print(f"The decoded text is {plain_text}")    
+
+  #Inside the 'decrypt' function, shift each letter of the 'text' *backwards* in the alphabet by the shift amount and print the decrypted text.  
+  #e.g. 
+  #cipher_text = "mjqqt"
+  #shift = 5
+  #plain_text = "hello"
+  #print output: "The decoded text is hello"
+
+#Check if the user wanted to encrypt or decrypt the message by checking the 'direction' variable. Then call the correct function based on that 'drection' variable.
+    
+if direction == 'encode':
+    encrypt(plain_text=text, shift_amount=shift)    
+elif direction == 'decode':  
+    decrypt(cipher_text=text, shift_amount=shift) 
